@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TaskMaster - Your Todo App</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+  </head>
+  <body>
+    <div class="app-container">
+      <header class="app-header">
+        <h1>TaskMaster</h1>
+      </header>
+
+      <div class="app-content">
+        <aside class="sidebar">
+          <div class="sidebar-header">
+            <div class="user-account">
+              <span class="user-icon">👤</span>
+              <span class="user-name">User</span>
+            </div>
+            <button class="close-sidebar">×</button>
+          </div>
+
+          <nav class="sidebar-nav">
+            <button class="nav-item active" data-section="all-tasks">
+              <span class="nav-icon">📋</span>
+              <span class="nav-text">All Tasks</span>
+            </button>
+            <button class="nav-item" data-section="today">
+              <span class="nav-icon">📅</span>
+              <span class="nav-text">Today</span>
+            </button>
+            <button class="nav-item" data-section="upcoming">
+              <span class="nav-icon">⏳</span>
+              <span class="nav-text">Upcoming</span>
+            </button>
+            <button class="nav-item" data-section="important">
+              <span class="nav-icon">⭐</span>
+              <span class="nav-text">Important</span>
+            </button>
+            <button class="nav-item" data-section="completed">
+              <span class="nav-icon">✅</span>
+              <span class="nav-text">Completed</span>
+            </button>
+            <div class="projects-section">
+              <h3>Projects</h3>
+              <button class="nav-item" data-section="project-work">
+                <span class="nav-icon">📁</span>
+                <span class="nav-text">Work</span>
+              </button>
+              <button class="nav-item" data-section="project-personal">
+                <span class="nav-icon">📁</span>
+                <span class="nav-text">Personal</span>
+              </button>
+              <button class="nav-item" data-section="project-personal">
+                <span class="nav-icon">📁</span>
+                <span class="nav-text">Code</span>
+              </button>
+              <button class="nav-item add-project-button">
+                <span class="nav-icon">➕</span>
+                <span class="nav-text">Add Project</span>
+              </button>
+            </div>
+          </nav>
+        </aside>
+
+        <main class="main-content">
+          <div class="main-header">
+            <h2 class="section-title">All Tasks</h2>
+            <div class="header-actions">
+              <button class="search-button">🔍</button>
+              <button class="notification-button">🔔</button>
+              <button class="add-task-button">+ Add New Task</button>
+            </div>
+          </div>
+          <div class="tasks-container">
+            <h3 class="tasks-title">Tasks</h3>
+            <div class="tasks-list">
+              <!-- Task items will be added here -->
+              <div class="task-item">
+                <div class="task-checkbox">
+                  <input type="checkbox" class="task-complete" />
+                </div>
+                <div class="task-content">
+                  <div class="task-header">
+                    <h4 class="task-title">Sample Task</h4>
+                    <div class="task-actions">
+                      <span class="task-date">Due: 2024-03-20</span>
+                      <button class="task-edit">✏️</button>
+                      <button class="task-expand">▼</button>
+                      <button class="task-delete">🗑️</button>
+                    </div>
+                  </div>
+                  <div class="task-details">
+                    <p>Task details will appear here when expanded</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+
+      <footer class="app-footer">
+        <p>Created by <span class="creator-name">Your Name</span> © 2024</p>
+      </footer>
+    </div>
+
+    <div class="modal" id="addTaskModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Add New Task</h3>
+          <button class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="addTaskForm">
+            <div class="form-group">
+              <input
+                type="text"
+                id="taskTitle"
+                placeholder="Enter task title"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <textarea
+                id="taskDetails"
+                placeholder="Enter task details (optional)"
+                rows="1"
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <div class="date-input-container">
+                <input
+                  type="text"
+                  id="taskDate"
+                  class="date-input"
+                  placeholder="Select due date"
+                />
+                <button type="button" class="calendar-button">📅</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="taskProject">Project</label>
+              <select id="taskProject" name="taskProject" required>
+                <!-- Options will be populated dynamically -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="checkbox-container">
+                <input type="checkbox" id="taskImportant" />
+                <span class="checkmark"></span>
+                Mark as Important
+              </label>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="cancel-button">Cancel</button>
+          <button class="add-button">Add Task</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="addProjectModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Add New Project</h3>
+          <button class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="addProjectForm">
+            <div class="form-group">
+              <label for="projectName">Project Name</label>
+              <input type="text" id="projectName" required />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="cancel-button">Cancel</button>
+          <button class="add-button">Add Project</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit Task Modal -->
+    <div class="modal" id="editTaskModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Edit Task</h3>
+          <button class="close-modal">&times;</button>
+        </div>
+        <form id="editTaskForm">
+          <div class="form-group">
+            <label for="editTaskTitle">Title</label>
+            <input type="text" id="editTaskTitle" required />
+          </div>
+          <div class="form-group">
+            <label for="editTaskDetails">Details</label>
+            <textarea id="editTaskDetails"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="editTaskDate">Due Date</label>
+            <input type="text" id="editTaskDate" />
+          </div>
+          <div class="form-group">
+            <label for="editTaskProject">Project</label>
+            <select id="editTaskProject">
+              <option value="">Select Project</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="editTaskImportant" />
+              <span>Mark as Important</span>
+            </label>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="cancel-button">Cancel</button>
+            <button type="submit" class="add-button">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
